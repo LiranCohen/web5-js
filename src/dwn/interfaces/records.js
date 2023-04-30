@@ -67,7 +67,7 @@ export class Records extends Interface {
 
   async query(target, request) {
     const response = await this.send('Query', target, request);
-    const entries = response.entries.map(entry => new Record(this.dwn, { ...entry, target, author: request.author }));
+    const entries = response.entries && Array.isArray(response.entries) && response.entries.map(entry => new Record(this.dwn, { ...entry, target, author: request.author }));
 
     return { ...response, entries };
   }
